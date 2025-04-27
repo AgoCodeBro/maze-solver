@@ -23,3 +23,7 @@ these are some of the features that will be added
 - Maze solving
 - Visualization of the solving path
 
+## License
+
+[MIT](LICENSE)
+
