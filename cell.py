@@ -38,6 +38,21 @@ class Cell():
         self.has_top_wall = True
         self.has_bottom_wall = True
 
+    def __repr__(self) -> str:
+        """Returns a string representation of the cell"""
+        result =  f"""Cell
+----------
+Top Left: {self.top_left}
+Top Right: {self.top_right}
+Bottom Left: {self.bottom_left}
+Bottom Right: {self.bottom_right}
+Right Wall: {self.has_right_wall}
+Left Wall: {self.has_left_wall}
+Top Wall: {self.has_top_wall}
+Bottom Wall: {self.has_bottom_wall}
+"""
+        return result
+
     
     def draw(self) -> None:
         """Draws the cell on its window's canvas"""
@@ -57,4 +72,37 @@ class Cell():
         if self.has_bottom_wall:
             line = Line(self.bottom_left, self.bottom_right)
             self.win.draw_line(line, "black")
+
+
+    def draw_move(self, to_cell: 'Cell', undo: bool = False) -> None:
+        """Draws a line from the center of the current cell to the center of the destination cell
         
+        Args:
+            to_cell (Cell): The cell the move is going to
+            undo (Bool): Flag to denote we are undoing a move and change the color of the line accordingly
+        """
+        if undo:
+            color = "grey"
+
+        else:
+            color = 'red'
+
+        cur_center = self.center()
+        to_center = to_cell.center()
+        path = Line(cur_center, to_center)
+
+        self.win.draw_line(path, color)
+
+        
+
+    def center(self) -> Point:
+        """Calculates the point at the center of the cell and returns it
+        
+        Returns:
+            Point: Represents center of cell rounded down to nearest pixel
+        """
+        cur_mid_x = (self.top_left.x + self.bottom_right.x) // 2
+        cur_mid_y = (self.top_left.y + self.bottom_right.y) // 2
+
+        return Point(cur_mid_x, cur_mid_y)
+

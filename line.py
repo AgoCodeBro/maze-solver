@@ -20,6 +20,15 @@ class Line():
         self.start = start
         self.end = end
 
+    def __repr__(self) -> str:
+        """Returns string representation of the line"""
+        result = f"""Line
+------
+Start: {self.start}
+End: {self.end}
+"""
+        return result
+
     
     def draw(self, canvas, fill_color) -> None:
         """Draws a 2px wide line of the specifed color on the given canvas

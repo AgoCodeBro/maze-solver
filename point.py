@@ -18,3 +18,13 @@ class Point():
         """
         self.x = x
         self.y = y
+
+
+    def __repr__(self) -> str:
+        """Returns a string representation of the point"""
+        result = f"""Point
+--------
+X: {self.x}
+Y: {self.y}
+"""
+        return result

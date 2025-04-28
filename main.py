@@ -23,8 +23,18 @@ def main() -> None:
     cells[2].has_bottom_wall = False
     cells[3].has_right_wall = False
 
+    top_left = Point(2, top_left.y + 50)
+    bottom_right = Point(52, bottom_right.y + 50)
+
+    cells.append(Cell(top_left, bottom_right, win))
+
     for cell in cells:
         cell.draw()
+
+    cells[0].draw_move(cells[1])
+    cells[1].draw_move(cells[2])
+    cells[1].draw_move(cells[2], undo=True)
+    cells[0].draw_move(cells[4])
 
     win.wait_for_close()
 
