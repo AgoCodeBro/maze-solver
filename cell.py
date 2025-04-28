@@ -18,6 +18,8 @@ class Cell():
         has_top_wall (bool): Flag indicates if top wall is present
         has_bottom_wall (bool): Flag indicates if bottom wall is present
         win (Window): The window that has the canvase where cell will be drawn on
+        visited (bool): Flag to indicate if walls for the cell have been broken 
+            while genereating the maze
     """
 
     def __init__(self, top_left: Point, bottom_right: Point, win: Window | None = None) -> None:
@@ -37,6 +39,7 @@ class Cell():
         self.has_right_wall = True
         self.has_top_wall = True
         self.has_bottom_wall = True
+        self.visited = False
 
     def __repr__(self) -> str:
         """Returns a string representation of the cell"""

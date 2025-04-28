@@ -8,7 +8,7 @@ class Point():
         x (int): Distance from the left edge in pixels
         y (int): Distance from the top edge in pixels
     """
-
+    
     def __init__(self, x, y) -> None:
         """Creates an instance of a point.
         
@@ -18,7 +18,6 @@ class Point():
         """
         self.x = x
         self.y = y
-
 
     def __repr__(self) -> str:
         """Returns a string representation of the point"""
