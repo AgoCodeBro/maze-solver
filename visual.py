@@ -1,8 +1,22 @@
 from tkinter import Tk, BOTH, Canvas
 
 class Window():
+    """An application window that can update.
+    
+    Attributes
+        width (int): Width of the window in pixels
+        height (int): Height of the window in pixels
+        root (Tk): Root widget for Tkinter
+        is_running (bool): Flag that indicates if a window is active
+    """
 
     def __init__(self, width, height):
+        """Creates a new window instance.
+        
+        Args:
+            width (int): Width of the window
+            height (int): Height of the window
+        """
         self.width = width
         self.height = height
         self.root = Tk()
@@ -11,7 +25,7 @@ class Window():
 
         self.canvas.pack()
 
-        self.isRunning = False
+        self.is_running = False
         self.root.protocol("WM_DELETE_WINDOW", self.close)
 
 
@@ -21,11 +35,11 @@ class Window():
 
 
     def wait_for_close(self):
-        self.isRunning = True
-        while self.isRunning:
+        self.is_running = True
+        while self.is_running:
             self.redraw()
 
 
     def close(self):
-        self.isRunning = False
+        self.is_running = False
 
