@@ -30,16 +30,19 @@ class Window():
 
 
     def redraw(self):
+        """Redraws the content of the window"""
         self.root.update_idletasks()
         self.root.update()
 
 
     def wait_for_close(self):
+        """Continuously redraws the window"""
         self.is_running = True
         while self.is_running:
             self.redraw()
 
 
     def close(self):
+        """Sets the is_running flag to false to stop redrawing the window"""
         self.is_running = False
 
