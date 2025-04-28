@@ -15,7 +15,7 @@ class Maze():
         win (Window): Window on which the maze should be drawn
     """
 
-    def __init__(self, start_x: int, start_y: int, num_rows: int, num_cols: int, cell_size_x: int, cell_size_y: int, win: Window) -> None:
+    def __init__(self, start_x: int, start_y: int, num_rows: int, num_cols: int, cell_size_x: int, cell_size_y: int, win: Window | None = None) -> None:
         """Creates an instance of a maze
         
         Args:
@@ -28,6 +28,7 @@ class Maze():
             win (Window): Window on which the maze should be drawn
             _cells (List[List[Cell]]): A 2d list of cells that represents the maze
         """
+
         self.start = Point(start_x, start_y)
         self.num_rows = num_rows
         self.num_cols = num_cols
@@ -59,6 +60,9 @@ class Maze():
                 
     def _draw_cell(self, i: int, j: int) -> None:
         """Draws the cell at grid positon i, j where 0,0 is the top right corner"""
+        if self.win is None:
+            return
+        
         self._cells[i][j].draw()
         self._animate()
 
@@ -66,6 +70,16 @@ class Maze():
         """Draws the maze with a delay so that the user can see what is happening"""
         self.win.redraw()
         time.sleep(0.05)
+
+    def _break_entrance_and_exit(self) -> None:
+        """Breaks the top wall of the top left cell and the bottom wall of the bottom
+        right cell creating the start and exit
+        """
+        self._cells[0][0].has_top_wall = False
+        self._cells[self.num_cols - 1][self.num_rows - 1].has_bottom_wall = False
+
+        self._draw_cell(0,0)
+        self._draw_cell(self.num_cols - 1, self.num_cols - 1)
 
 
         

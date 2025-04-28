@@ -9,6 +9,7 @@ def main() -> None:
     """Creates a 800x600 pixel window and a maze grid and displays them untill the user closes it."""
     win = Window(800, 600)
     maze = Maze(3, 3, 10, 10, 25, 25, win)
+    maze._break_entrance_and_exit()
 
     win.wait_for_close()
 

@@ -20,7 +20,7 @@ class Cell():
         win (Window): The window that has the canvase where cell will be drawn on
     """
 
-    def __init__(self, top_left: Point, bottom_right: Point, win: Window) -> None:
+    def __init__(self, top_left: Point, bottom_right: Point, win: Window | None = None) -> None:
         """Creates an instance of the Cell class and gives it all 4 walls by default
         
         Args:
@@ -56,22 +56,40 @@ Bottom Wall: {self.has_bottom_wall}
     
     def draw(self) -> None:
         """Draws the cell on its window's canvas"""
+        if self.win is None:
+            return
 
         if self.has_left_wall:
             line = Line(self.top_left, self.bottom_left)
             self.win.draw_line(line, "black")
         
+        else:
+            line = Line(self.top_left, self.bottom_left)
+            self.win.draw_line(line, "#d9d9d9")
+        
         if self.has_right_wall:
             line = Line(self.top_right, self.bottom_right)
             self.win.draw_line(line, "black")
+
+        else:
+            line = Line(self.top_right, self.bottom_right)
+            self.win.draw_line(line, "#d9d9d9")
         
         if self.has_top_wall:
             line = Line(self.top_left, self.top_right)
             self.win.draw_line(line, "black")
+
+        else:
+            line = Line(self.top_left, self.top_right)
+            self.win.draw_line(line, "#d9d9d9")
         
         if self.has_bottom_wall:
             line = Line(self.bottom_left, self.bottom_right)
             self.win.draw_line(line, "black")
+
+        else:
+            line = Line(self.bottom_left, self.bottom_right)
+            self.win.draw_line(line, "#d9d9d9")
 
 
     def draw_move(self, to_cell: 'Cell', undo: bool = False) -> None:
