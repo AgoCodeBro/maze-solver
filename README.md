@@ -12,7 +12,7 @@ git clone https://github.com/AgoCodeBro/maze-solver
 
 ## Usage
 
-The project is currently unfinished. To run the current state:
+To run the project, use:
 
 ```bash
 python3 main.py
@@ -23,12 +23,13 @@ python3 main.py
 
 these are some of the features that will be added
 
-- Maze generation
-- Maze solving
-- Visualization of the solving path using:
+- Select what algorithim is used:
     - BFS
     - DFS
     - A*
+
+- Choose grid size
+- Make window resizable
 
 ## License
 

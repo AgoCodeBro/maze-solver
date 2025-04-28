@@ -126,4 +126,7 @@ Bottom Wall: {self.has_bottom_wall}
         cur_mid_y = (self.top_left.y + self.bottom_right.y) // 2
 
         return Point(cur_mid_x, cur_mid_y)
+    
+
+
 

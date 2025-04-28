@@ -47,6 +47,9 @@ class Maze():
         self._cells = []
 
         self._create_cells()
+        self._break_entrance_and_exit()
+        self._break_walls_r(0, 0)
+        self._reset_cells_visited()
     
     def _create_cells(self) -> None:
         """Populates the _cells attribute"""
@@ -144,13 +147,91 @@ class Maze():
 
                 self._break_walls_r(x, y)
 
-
-
     def _reset_cells_visited(self) -> None:
         """Set visited to false for all cells"""
         for column in self._cells:
             for cell in column:
                 cell.visited = False
+
+    def solve(self) -> bool:
+        """Visually solves the maze.
+        
+        Return True if maze is solved and False if it is not
+        """
+        return self.solve_r(0,0)
+
+    def solve_r(self, i, j) -> bool:
+        """Recursively solves the maze while drawing the path
+        
+        Args:
+            i (int): Current x position in the maze
+            j (int): Current y position in the maze
+        """
+        if i == self.num_cols - 1 and j == self.num_rows -1:
+            return True
+        
+        cur_cell = self._cells[i][j]
+        cur_cell.visited = True
+        neighbors = self.get_neighbors(cur_cell, i, j)
+        directions = {"up" : (i, j - 1 ),
+                      "down" : (i, j + 1),
+                      "left" : (i - 1, j),
+                      "right" : (i + 1, j)}
+        
+        if len(neighbors) == 0:
+            return False
+
+        for direction in neighbors:
+            x = directions[direction][0]
+            y = directions[direction][1]
+            next_cell =  self._cells[x][y]
+            if not next_cell.visited:
+                cur_cell.draw_move(next_cell)
+                self._animate()
+                result = self.solve_r(x, y)
+                if result:
+                    return True
+
+                else:
+                    cur_cell.draw_move(next_cell, undo=True)
+                    self._animate()
+                
+ 
+
+            
+
+        return False
+    
+    def get_neighbors(self, cur_cell: Cell, i: int, j: int) -> list[str]:
+        """Returns a list with valid directions you can go in maze from a given cell
+        
+        Args:
+            cur_cell (Cell): The cell we are finding the neighbors of
+            i (int): Current x position in the maze
+            j (int): Current y position in the maze
+
+        Returns list containg strings of directions you can move
+        """
+        neighbors = []
+
+        if not cur_cell.has_top_wall and j > 0:
+            neighbors.append("up")
+
+        if not cur_cell.has_bottom_wall and j < self.num_rows - 1:
+            neighbors.append("down")
+            
+        if not cur_cell.has_left_wall and i > 0:
+            neighbors.append("left")
+            
+        if not cur_cell.has_right_wall and i < self.num_cols - 1 :
+            neighbors.append("right")
+
+        return neighbors
+            
+
+
+
+
 
 
             
