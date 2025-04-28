@@ -1,5 +1,5 @@
 from tkinter import Tk, BOTH, Canvas
-from lines import Line
+from line import Line
 
 class Window():
     """An application window that can update.
