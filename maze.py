@@ -144,7 +144,7 @@ class Maze():
 
                 self._break_walls_r(x, y)
 
-        self._reset_cells_visited()
+
 
     def _reset_cells_visited(self) -> None:
         """Set visited to false for all cells"""

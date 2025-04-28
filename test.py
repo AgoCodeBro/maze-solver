@@ -32,6 +32,7 @@ class Tests(unittest.TestCase):
 
         m1._break_entrance_and_exit()
         m1._break_walls_r(0,0)
+        m1._reset_cells_visited()
 
         for column in m1._cells:
             for cell in column:
