@@ -1,0 +1,73 @@
+from cell import Cell
+from point import Point
+from window import Window
+import time
+
+class Maze():
+    """Representaion of the maze made up of a grid of cells
+    
+    Attributes:
+        start (Point): What point should the maze start be
+        num_rows (int): Number of rows of cells the maze has
+        num_cols (int): Number of columns of cells the maze has
+        cell_size_x (int): Width of each cell in pixels
+        cell_size_y (int): Height of each cell in pixels
+        win (Window): Window on which the maze should be drawn
+    """
+
+    def __init__(self, start_x: int, start_y: int, num_rows: int, num_cols: int, cell_size_x: int, cell_size_y: int, win: Window) -> None:
+        """Creates an instance of a maze
+        
+        Args:
+            start_x (int): What x coordinat the maze start should be
+            start_y (int): What y coordinat the maze start should be
+            num_rows (int): Number of rows of cells the maze has
+            num_cols (int): Number of columns of cells the maze has
+            cell_size_x (int): Width of each cell in pixels
+            cell_size_y (int): Height of each cell in pixels if None is 
+            win (Window): Window on which the maze should be drawn
+            _cells (List[List[Cell]]): A 2d list of cells that represents the maze
+        """
+        self.start = Point(start_x, start_y)
+        self.num_rows = num_rows
+        self.num_cols = num_cols
+        self.cell_size_x = cell_size_x
+        self.cell_size_y = cell_size_y
+        self.win = win
+        self._cells = []
+
+        self._create_cells()
+
+    
+    def _create_cells(self) -> None:
+        """Populates the _cells attribute"""
+
+        for i in range(self.num_cols):
+            self._cells.append([])
+
+            for j in range(self.num_rows):
+                top_left_x = self.start.x + (i * self.cell_size_x)
+                top_left_y = self.start.y + (j * self.cell_size_y)
+                top_left = Point(top_left_x, top_left_y)
+                
+                bottom_right_x = top_left_x + self.cell_size_x
+                bottom_right_y = top_left_y + self.cell_size_y
+                bottom_right = Point(bottom_right_x, bottom_right_y)
+
+                self._cells[i].append(Cell(top_left, bottom_right, self.win))
+                self._draw_cell(i, j)
+                
+    def _draw_cell(self, i: int, j: int) -> None:
+        """Draws the cell at grid positon i, j where 0,0 is the top right corner"""
+        self._cells[i][j].draw()
+        self._animate()
+
+    def _animate(self) -> None:
+        """Draws the maze with a delay so that the user can see what is happening"""
+        self.win.redraw()
+        time.sleep(0.05)
+
+
+        
+
+        
